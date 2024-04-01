@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+<title>Ecom | Login</title>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluname">
+    <div class="row">
+        <h1 class="background text-light p-2 text-center">Contact Us</h1>
+        <div class="col-xxl-6 col-xl-6 col -lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="container">
+                <div class="card background text-light p-2 text-center" style="margin-bottom: 10px;">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Ecom.com</h5>
+                        <h5 class="card-title">Phone : 9389787894</h5>
+                        <h5 class="card-title">Email : aakashkumar3102@gmail.com</h5>
+
+                    </div>
+                </div>
+                <div style="overflow:hidden;resize:none;max-width:100%;width:600px;height:500px;">
+                    <div id="gmapcanvas" style="height:100%; width:100%;max-width:100%;"><iframe
+                            style="height:100%;width:100%;border:0;" frameborder="0"
+                            src="https://www.google.com/maps/embed/v1/place?q=chanakya+place,new+delhi&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
+                    </div><a class="googlecode" rel="nofollow" href="https://www.embed-map.com"
+                        id="authorizemaps-data">https://www.embed-map.com</a>
+                    <style>
+                        #gmapcanvas img {
+                            max-height: none;
+                            max-width: none !important;
+                            background: none !important;
+                        }
+                    </style>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xxl-6 col-xl-6 col -lg-6 col-md-6 col-sm-12 col-xs-12">
+            {% for i in messages %}
+            <div class="alert alert-success" role="alert">
+                {{i}}
+            </div>
+            {% endfor %}
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone no</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Enter phone no">
+                </div>
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control" name="subject" placeholder="Enter Subject">
+                </div>
+                <!-- <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" name="message" cols="30" rows="10"></textarea>
+                </div> -->
+                <button type="submit" class="btn btn-dark w-100">Send</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

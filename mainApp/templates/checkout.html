@@ -1,0 +1,131 @@
+{% extends 'index.html' %}
+{% load cart %}
+{% load static %}
+{% block title %}
+<title>Ecom | Checkout</title>
+{% endblock %}
+
+
+{% block body %}
+<h1 class="background text-light p-2 text-center">Checkout </h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <h5 class="background text-light p-2 text-center">Address Details </h5>
+            <form action="/updateprofile/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Enter name" value="{{User.name}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Enter email"
+                        value="{{User.email}}">
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone no</label>
+                    <input type="text" class="form-control" name="phone" placeholder="Enter phone no"
+                        value="{{User.phone}}">
+                </div>
+                <div class="mb-3">
+                    <label for="addressline1" class="form-label">Address line 1</label>
+                    <input type="text" class="form-control" name="addressline1" placeholder="Enter address line 1"
+                        value="{{User.addressline1}}">
+                </div>
+                <div class="mb-3">
+                    <label for="addressline2" class="form-label">Address line 2</label>
+                    <input type="text" class="form-control" name="addressline2" placeholder="Enter address line 2"
+                        value="{{User.addressline2}}">
+                </div>
+                <div class="mb-3">
+                    <label for="addressline3" class="form-label">Address line 3</label>
+                    <input type="text" class="form-control" name="addressline3" placeholder="Enter address line 3"
+                        value="{{User.addressline3}}">
+                </div>
+                <div class="mb-3">
+                    <label for="pin" class="form-label">PIN</label>
+                    <input type="text" class="form-control" name="pin" placeholder="Enter pin " value="{{User.pin}}">
+                </div>
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control" name="city" placeholder="Enter  city" value="{{User.city}}">
+                </div>
+                <div class="mb-3">
+                    <label for="state" class="form-label">State</label>
+                    <input type="text" class="form-control" name="state" placeholder="Enter state"
+                        value="{{User.state}}">
+                </div>
+
+
+                <button type="submit" class="btn btn-dark w-100">Edit</button>
+            </form>
+
+        </div>
+        <div class="col-sm-6 col-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Final Price</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                    {% for i in Products %}
+                    <tr>
+                        <td>{{i.name}}</td>
+                        <td>Rs. {{i.finalprice}}</td>
+                        <td>{{request|cartquantity:i.id}}</td>
+                        <td>{{request|cartfinal:i.id}}</td>
+
+                    </tr>
+                    {% endfor %}
+                    <tr>
+
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{Total}}</td>
+
+                    </tr>
+                    <tr>
+
+                        <td>Shipping Charge</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{Shipping}}</td>
+
+                    </tr>
+                    <tr>
+
+                        <td>Final Amount</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{Final}}</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <label>Payment Mode</label>
+                                <select name="mode" class="form-control">
+                                    <option value="cod">COD</option>
+                                    <option value="netbanking">Net Banking</option>
+                                </select>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><button type="submit" class="btn btn-dark text-light w-100">Place Order</button></td>
+                    </tr>
+                    </form>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

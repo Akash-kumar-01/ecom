@@ -1,0 +1,18 @@
+.background{
+    background-color: gray;
+    
+}
+.nav{
+    font-size: 25px;
+}
+.lbl{
+    text-align: center;
+    font-size: 30px;
+}
+.para{
+    text-align: center;
+    font-size: 30px;
+}
+.dis{
+    text-decoration: solid;
+}
