@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 import random
 
-from Ecom.settings import RAZORPAY_API_KEY, RAZORPAY_API_SECRET_KEY
-import razorpay
+# from Ecom.settings import RAZORPAY_API_KEY, RAZORPAY_API_SECRET_KEY
+# import razorpay
 from .models import *
 
 def home(request):
@@ -128,7 +128,7 @@ def deletecart(request,id):
     return HttpResponseRedirect('/cart/')
 
 
-client = razorpay.Client(auth=(RAZORPAY_API_KEY,RAZORPAY_API_SECRET_KEY))
+# client = razorpay.Client(auth=(RAZORPAY_API_KEY,RAZORPAY_API_SECRET_KEY))
 @login_required(login_url="/login/")
 def checkout(request):
     try:
@@ -165,13 +165,14 @@ def checkout(request):
             else:
                 orderAmount = check.finalamount*100
                 orderCurrency = 'INR'
-                paymentOrder = client.order.create(dict(amount=orderAmount,currency=orderCurrency,payment_capture=1))
+                paymentOrder = ''
+                # paymentOrder = client.order.create(dict(amount=orderAmount,currency=orderCurrency,payment_capture=1))
                 paymentId = paymentOrder['id']
                 check.mode = 2
                 check.save()
                 return render(request,"pay.html",{
                     "amount":orderAmount,
-                    "api_key" : RAZORPAY_API_KEY,
+                    # "api_key" : RAZORPAY_API_KEY,
                     "order_id" : paymentId,
                     "User" : buyer
                 })   
@@ -536,13 +537,14 @@ def paynow(request,num):
         check = Checkout.objects.get(id=num)
         orderAmount = check.finalamount*100
         orderCurrency = 'INR'
-        paymentOrder = client.order.create(dict(amount=orderAmount,currency=orderCurrency,payment_capture=1))
+        paymentOrder = ''
+        # paymentOrder = client.order.create(dict(amount=orderAmount,currency=orderCurrency,payment_capture=1))
         paymentId = paymentOrder['id']
         check.mode = 2
         check.save()
         return render(request,"pay.html",{
             "amount":orderAmount,
-            "api_key" : RAZORPAY_API_KEY,
+            # "api_key" : RAZORPAY_API_KEY,
             "order_id" : paymentId,
             "User" : buyer
             })   
